@@ -1,6 +1,6 @@
 from argparse import Namespace
 
-from cit.core.command import Command
+from cit.core.cmd_args.command import Command
 
 
 class InitCommand(Command):
