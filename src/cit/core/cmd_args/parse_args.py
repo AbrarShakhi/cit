@@ -78,6 +78,9 @@ class ParseArgs:
 
     def parse_cmd(self) -> Command:
         args = self.parse()
-        command = self.COOMMANDS[args]
-        if not args.command or not command:
+        command_name = args.command
+        command = self.COOMMANDS.get(command_name)
+        if not command_name or not command:
             return NoCommand(parser=self.parser)
+        
+        return command
