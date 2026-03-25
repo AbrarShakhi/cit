@@ -1,4 +1,4 @@
-from cli import ParseArgs
+from cit.core.parse_args import ParseArgs
 
 def main():
     parse_args = ParseArgs()

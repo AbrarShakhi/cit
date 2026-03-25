@@ -2,9 +2,9 @@
 import argparse
 from typing import Self
 
-from cit import InitCommand
-from cit import NoCommand
-from cit import Command
+from cit.core.init_command import InitCommand
+from cit.core.no_command import NoCommand
+from cit.core.command import Command
 
 
 class ParseArgs:

@@ -1,6 +1,6 @@
 from argparse import ArgumentParser, Namespace
 
-from cit import Command
+from cit.core.command import Command
 
 
 class NoCommand(Command):
