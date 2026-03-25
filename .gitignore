@@ -110,3 +110,5 @@ temp/
 # Mac/Linux hidden files
 
 .*.swp
+
+.cit
