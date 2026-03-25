@@ -127,3 +127,59 @@ class Repository:
             return json.loads(self.index_file.read_text())
         except:
             return {}
+
+    
+    def get_current_branch(self) -> str:
+        if not self.head_file.exists():
+            return "master"
+
+        head_content = self.head_file.read_text().strip()
+        if head_content.startswith("ref: refs/heads/"):
+            return head_content[16:]
+
+        return "HEAD"
+    
+    
+    def get_branch_commit(self, current_branch: str):
+        branch_file = self.heads_dir / current_branch
+
+        if branch_file.exists():
+            return branch_file.read_text().strip()
+
+        return None
+    
+
+    def set_branch_commit(self, current_branch: str, commit_hash: str):
+        branch_file = self.heads_dir / current_branch
+        branch_file.write_text(commit_hash + "\n")
+
+
+    def branch(self, branch_name: str, delete: bool = False):
+        # delete
+        if delete and branch_name:
+            branch_file = self.heads_dir / branch_name
+            if branch_file.exists():
+                branch_file.unlink()
+                print(f"Deleted branch {branch_name}")
+            else:
+                print(f"Branch {branch_name} not found")
+
+            return
+
+        current_branch = self.get_current_branch()
+        if branch_name:
+            current_commit = self.get_branch_commit(current_branch)
+            if current_commit:
+                self.set_branch_commit(branch_name, current_commit)
+                print(f"Created branch {branch_name}")
+            else:
+                print(f"No commits yet, cannot create a new branch")
+        else:
+            branches = []
+            for branch_file in self.heads_dir.iterdir():
+                if branch_file.is_file() and not branch_file.name.startswith("."):
+                    branches.append(branch_file.name)
+
+            for branch in sorted(branches):
+                current_marker = "* " if branch == current_branch else "  "
+                print(f"{current_marker}{branch}")
