@@ -1,6 +1,5 @@
 
 import time
-from typing import List
 
 from cit.core.objects.object import Object
 
@@ -38,7 +37,7 @@ class Commit(Object):
         return "\n".join(lines).encode()
 
     @classmethod
-    def from_content(cls, content: bytes) -> Commit:
+    def from_content(cls, content: bytes) -> "Commit":
         lines = content.decode().split("\n")
         tree_hash = None
         parent_hashes = []

@@ -1,6 +1,5 @@
 
 import hashlib
-from typing import Self
 import zlib
 
 
@@ -21,7 +20,7 @@ class Object:
 
 
     @classmethod
-    def deserialize(cls, data: bytes) -> Self:
+    def deserialize(cls, data: bytes) -> "Object":
         decompressed = zlib.decompress(data)
         null_idx = decompressed.find(b"\0")
         header = decompressed[:null_idx].decode()
