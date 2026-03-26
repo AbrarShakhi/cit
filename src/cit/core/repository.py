@@ -2,7 +2,7 @@
 import json
 from pathlib import Path
 import time
-from typing import Dict
+from typing import Dict, List
 
 from cit.core.objects.commit import Commit
 from cit.core.objects.object import Object
