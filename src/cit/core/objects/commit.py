@@ -1,5 +1,6 @@
 
 import time
+from typing import List
 
 from cit.core.objects.object import Object
 
