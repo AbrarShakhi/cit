@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "cit"
 version = "0.1.0"
-description = "CLI tool for cloning git repos easily"
+description = "Simple git clone written in python"
 authors = [
   { name="AbrarShakhi", email="placeholder@email.com" }
 ]

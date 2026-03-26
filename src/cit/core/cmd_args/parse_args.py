@@ -15,7 +15,7 @@ from cit.core.cmd_args.status_command import StatusCommand
 
 class ParseArgs:
     def __init__(self):
-        self.parser = argparse.ArgumentParser(description="Cit - A simple git clone written in python!")
+        self.parser = argparse.ArgumentParser(description="Cit - A simple cit clone written in python!")
         self.subparsers = self.parser.add_subparsers(dest="command", help="Available commands")
         self.COOMMANDS = {}
         self.args = None

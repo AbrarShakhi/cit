@@ -7,7 +7,7 @@ from cit.core.repository import Repository
 class LogCommand(Command):
     
     def execute(self, repo: Repository, args: Namespace):
-        if not repo.git_dir.exists():
+        if not repo.cit_dir.exists():
             print("Not a cit repository")
             return
 

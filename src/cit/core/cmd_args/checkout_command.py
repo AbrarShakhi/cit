@@ -7,8 +7,8 @@ from cit.core.repository import Repository
 class CheckoutCommand(Command):
     
     def execute(self, repo: Repository, args: Namespace):
-        if not repo.git_dir.exists():
-            print("Not a git repository")
+        if not repo.cit_dir.exists():
+            print("Not a cit repository")
             return
         
         repo.checkout(args.branch, args.create_branch)

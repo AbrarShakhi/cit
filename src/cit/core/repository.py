@@ -13,26 +13,26 @@ from cit.core.objects.tree import Tree
 class Repository:
     def __init__(self, path="."):
         self.path = Path(path).resolve()
-        self.git_dir = self.path / ".cit"
+        self.cit_dir = self.path / ".cit"
 
-         # .git/objects
-        self.objects_dir = self.git_dir / "objects"
+         # .cit/objects
+        self.objects_dir = self.cit_dir / "objects"
 
-        # .git/refs
-        self.ref_dir = self.git_dir / "refs"
+        # .cit/refs
+        self.ref_dir = self.cit_dir / "refs"
         self.heads_dir = self.ref_dir / "heads"
 
         # HEAD file
-        self.head_file = self.git_dir / "HEAD"
+        self.head_file = self.cit_dir / "HEAD"
 
-        # .git/index
-        self.index_file = self.git_dir / "index"
+        # .cit/index
+        self.index_file = self.cit_dir / "index"
 
     def init(self) -> bool:
-        if self.git_dir.exists():
+        if self.cit_dir.exists():
             return False
 
-        self.git_dir.mkdir()
+        self.cit_dir.mkdir()
         self.objects_dir.mkdir()
         self.ref_dir.mkdir()
         self.heads_dir.mkdir()
@@ -41,7 +41,7 @@ class Repository:
 
         self.save_index({})
 
-        print(f"Initialized empty Git repository in {self.git_dir}")
+        print(f"Initialized empty cit repository in {self.cit_dir}")
 
         return True
 
@@ -211,8 +211,8 @@ class Repository:
             return None
 
         if parent_commit:
-            parent_git_commit_obj = self.load_object(parent_commit)
-            parent_commit_data = Commit.from_content(parent_git_commit_obj.content)
+            parent_cit_commit_obj = self.load_object(parent_commit)
+            parent_commit_data = Commit.from_content(parent_cit_commit_obj.content)
             if tree_hash == parent_commit_data.tree_hash:
                 print("nothing to commit, working tree clean")
                 return None
@@ -496,7 +496,7 @@ class Repository:
         files = []
 
         for item in self.path.rglob("*"):
-            if ".git" in item.parts:
+            if ".cit" in item.parts:
                 continue
 
             if item.is_file():

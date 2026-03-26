@@ -7,7 +7,7 @@ from cit.core.repository import Repository
 class AddCommand(Command):
     
     def execute(self, repo: Repository, args: Namespace):
-        if not repo.git_dir.exists():
+        if not repo.cit_dir.exists():
             print("fatal: not a cit repository (or any of the parent directories): .cit")
             return
 
