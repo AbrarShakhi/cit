@@ -141,59 +141,6 @@ classDiagram
     Object <|-- Commit
 ```
 
-#### Command layer
-
-```mermaid
-classDiagram
-    class Command {
-        <<abstract>>
-        +execute(repo, args)*
-    }
-
-    class ParseArgs {
-        +parser : ArgumentParser
-        +COMMANDS : dict
-        +add_init_command() Self
-        +add_add_command() Self
-        +add_commit_command() Self
-        +add_checkout_command() Self
-        +add_branch_command() Self
-        +add_log_command() Self
-        +add_status_command() Self
-        +parse() Namespace
-        +parse_cmd() Command
-    }
-
-    class Repository {
-        +Path path
-        +Path cit_dir
-        +init() bool
-        +add_path(path)
-        +commit(message, author)
-        +checkout(branch, create_branch)
-        +branch(name, delete)
-        +log(max_count)
-        +status()
-        +store_object(obj) str
-        +load_object(hash) Object
-        +load_index() dict
-        +save_index(index)
-        +get_current_branch() str
-    }
-
-    Command <|-- InitCommand
-    Command <|-- AddCommand
-    Command <|-- CommitCommand
-    Command <|-- CheckoutCommand
-    Command <|-- BranchCommand
-    Command <|-- LogCommand
-    Command <|-- StatusCommand
-    Command <|-- NoCommand
-
-    ParseArgs --> Command : dispatches
-    Command --> Repository : calls
-```
-
 ### Commit workflow — sequence diagram
 
 ```mermaid
